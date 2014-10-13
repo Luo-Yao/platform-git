@@ -76,3 +76,29 @@ webapp  为web页面目录，包含jsp、html、css、javascript等
     为了防止用户刷新浏览器(F5)导致表单重复提交，一般在保存或修改操作之后会redirect到一个结果页面（不是forward），
     同时携带参数，如操作成功的提示信息。因为是Redirect，Request里的attribute不会传递过去。
     Spring在3.1才提供了这个能力--RedirectAttributes。 反复按F5，操作成功的提示信息也不会再次出来（总共只出现一次），效果很理想。
+
+
+
+----------platform新框架-log日志级别和编码注意事项 说明文档----------------
+  <!--
+    从小到大OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL
+    如果root设置为info，则debug级别的日志信息将不被打印出来
+    -->
+
+------------------------------------开发环境------------------------------------------------------
+在开发过程中，root的日志级别设置为debug
+
+在开发过程中，一般情况下java代码中的log日志级别应为debug，如下：
+        logger.debug("PlatformConstants.apacheTomcatPath============"+PlatformConstants.apacheTomcatPath);
+
+在开发过程中，如果对于框架和各个技术点很熟悉的情况下，想不打印某些引入的包的日志，可以做如下设置：
+        <logger name="net.sf.json.JSONObject" level="ERROR"/>
+        <logger name="org.springframework" level="ERROR"/>
+
+
+-------------------------------生产环境------------------------------------------------------
+在生产环境中，root的日志级别设置为info
+
+在生产环境中，如果要强制打印java代码中的某些信息，可以编码为info：
+        logger.debug("PlatformConstants.apacheTomcatPath============"+PlatformConstants.apacheTomcatPath);
+
