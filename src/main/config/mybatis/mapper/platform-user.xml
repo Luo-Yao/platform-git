@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tinet.ccic.v3.app.permission.dao.UserMapper">
+
+
+    <sql id="common">
+      <where>
+          <if test="name != null and name !=''">
+              name = #{name}
+          </if>
+          <if test="pwd != null and pwd !=''">
+            and pwd = #{pwd}
+          </if>
+      </where>
+    </sql>
+
+    <select id="userLogin" parameterType="java.util.HashMap" resultType="com.tinet.ccic.v3.app.permission.pojo.UserPojo">
+
+      <![CDATA[
+          select
+              enterprise_id as enterpriseId,
+              name as name,
+              pwd as pwd,
+              description as description
+
+          from
+            enterprise_user
+        ]]>
+        <include refid="common"/>
+    </select>
+
+</mapper>

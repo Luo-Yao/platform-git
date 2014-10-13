@@ -1,0 +1,23 @@
+----------platform新框架-log日志级别和编码注意事项 说明文档----------------
+  <!--
+    从小到大OFF、FATAL、ERROR、WARN、INFO、DEBUG、ALL
+    如果root设置为info，则debug级别的日志信息将不被打印出来
+    -->
+
+------------------------------------开发环境------------------------------------------------------
+在开发过程中，root的日志级别设置为debug
+
+在开发过程中，一般情况下java代码中的log日志级别应为debug，如下：
+        logger.debug("PlatformConstants.apacheTomcatPath============"+PlatformConstants.apacheTomcatPath);
+
+在开发过程中，如果对于框架和各个技术点很熟悉的情况下，想不打印某些引入的包的日志，可以做如下设置：
+        <logger name="net.sf.json.JSONObject" level="ERROR"/>
+        <logger name="org.springframework" level="ERROR"/>
+
+
+-------------------------------生产环境------------------------------------------------------
+在生产环境中，root的日志级别设置为info
+
+在生产环境中，如果要强制打印java代码中的某些信息，可以编码为info：
+        logger.debug("PlatformConstants.apacheTomcatPath============"+PlatformConstants.apacheTomcatPath);
+

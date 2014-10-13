@@ -1,0 +1,5 @@
+----------Mybatis 说明文档----------------
+
+
+类：com.tinet.ccic.c3.app.test.controller.LoginController
+访问方式：http://localhost:8080/platform/background/to_login

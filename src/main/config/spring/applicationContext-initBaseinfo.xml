@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd" default-lazy-init="false">
+
+
+    <bean id="platformConstants" class="com.framework.common.inc.PlatformConstants">
+
+        <property name="apacheTomcatPath" value="/usr/local/apache-tomcat-8.0.9/"/>
+
+        <property name="ckinderUploadPath" value="/usr/local/apache-tomcat-8.0.9/webapps/ROOT/images/KBUserfiles/"/>
+
+        <property name="cookieDomainName" value="platform.tinet.ccic.v3"/>
+        <property name="cookieMaxAge" value="1209600"/>  <!--60 * 60 * 24 * 7 * 2 两个星期 -->
+        <property name="webKey" value="platform"/>
+
+    </bean>
+
+
+</beans>

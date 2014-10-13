@@ -1,0 +1,30 @@
+BaseDao
+    saveDb()
+    {
+        saveRedis()
+    }
+
+
+
+1.UserDao.Db()
+saveRedis
+updateRedis
+
+2.UserDao.saveDb(String str);
+
+
+save update
+
+    queue__row_id.saveRedis
+
+
+
+userService.select(String str)
+
+    BaseDao.select
+    {
+        res=getRedis(str)
+        if(res==null){
+            selectDb();
+        }
+    }

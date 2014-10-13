@@ -1,0 +1,31 @@
+----------Spring mvc 说明文档----------------
+
+在web.xml中的配置：
+
+<!-- springMVC的配置 -->
+    <servlet>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:spring/mvc/applicationContext-mvc.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+	</servlet>
+    <servlet-mapping>
+		<servlet-name>mvc-dispatcher</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+
+Demo:
+
+1.类         com.tinet.ccic.c3.app.demo.controller.UserController
+  访问方式：  http://localhost:8080/platform/selectUsers/to_select_user
+            http://localhost:8080/platform/selectUsers/returnMap?a=123
+
+返回试图：默认路径、指定路径
+
+参数：@RequestParam(value = "a",required = true,defaultValue = Constants.DEFAULT_EMPTY_STR) String a
+    a参数必传，默认为空字符串
+

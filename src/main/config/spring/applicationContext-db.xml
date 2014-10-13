@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!-- 数据源属性配置文件 引入jdbc配置文件-->
+    <!--<context:property-placeholder location="classpath:postgres.properties" ignore-unresolvable="true"/>-->
+    <!--创建jdbc数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!-- 数据库驱动 -->
+        <property name="driverClass" value="${jdbc.driverClassName}" />
+        <!-- 连接URL串 -->
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <!-- 连接用户名 -->
+        <property name="user" value="${jdbc.username}" />
+        <!-- 连接密码 -->
+        <property name="password" value="${jdbc.password}" />
+        <!-- 初始化连接池时连接数量为5个 -->
+        <property name="initialPoolSize" value="${cpool.minPoolSize}" />
+        <!-- 允许最小连接数量为5个 -->
+        <property name="minPoolSize" value="${cpool.minPoolSize}" />
+        <!-- 允许最大连接数量为20个 -->
+        <property name="maxPoolSize" value="${cpool.maxPoolSize}" />
+        <!-- 连接有效时间，连接超过3600秒未使用，则该连接丢弃 -->
+        <property name="maxIdleTime" value="${cpool.maxIdleTime}" />
+        <!-- 连接用完时，一次产生的新连接步进值为3 -->
+        <property name="acquireIncrement" value="${cpool.acquireIncrement}" />
+        <!-- 获取连接失败后再尝试10次，再失败则返回DAOException异常 -->
+        <property name="acquireRetryAttempts" value="${cpool.acquireRetryAttempts}" />
+        <!-- 获取新连接的超时时间为10000毫秒 -->
+        <property name="checkoutTimeout" value="${cpool.checkoutTimeout}" />
+        <!--这个配置主要是为了快速减轻连接池的负载，比如连接池中连接数因为某次数据访问高峰导致创建了很多数据连接，-->
+        <!--但是后面的时间段需要的数据库连接数很少，需要快速释放，必须小于maxIdleTime。其实这个没必要配置，maxIdleTime已经配置了。default : 0 单位 s（不建议使用）-->
+        <!--<property name="maxIdleTimeExcessConnections" value="${cpool.maxIdleTimeExcessConnections}" />-->
+        <!--连接关闭时默认将所有未提交的操作回滚。Default: false -->
+        <property name="autoCommitOnClose" value="true" />
+    </bean>
+
+    <!-- 注解式事务处理 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- 数据连接管理 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <!-- myBatis文件 创建SqlSessionFactory，同时指定数据源-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"/>
+        <property name="mapperLocations" value="classpath*:/mybatis/mapper/*.xml" />
+    </bean>
+
+    <!-- scan for mappers and let them be autowired -->
+    <!--  Mapper接口所在包名，Spring会自动查找其下的Mapper-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.tinet.ccic.v3.app.**.dao" />
+        <!--<property name="markerInterface" value="com.tinet.ccic.c3.app.test.mapper.SqlMapper"/>-->
+    </bean>
+
+
+
+</beans>

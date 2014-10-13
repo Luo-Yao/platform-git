@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tinet.ccic.v3.app.demo.dao.DemoUserMapper">
+
+    <sql id="common">
+        <where>
+            <if test="id != null and id !=''">
+                id = #{id}
+            </if>
+            <if test="name != null and name !=''">
+                and name = #{name}
+            </if>
+            <if test="address != null and address !='' ">
+                and address = #{address}
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectUsersList" resultType="com.tinet.ccic.v3.app.demo.pojo.DemoUserPojo">
+         <![CDATA[
+          select
+              id as id,
+              name as name,
+              address as address,
+              create_time as createTime
+
+          from
+            users
+        ]]>
+        <include refid="common"/>
+    </select>
+
+    <insert id="insert" parameterType="com.tinet.ccic.v3.app.demo.pojo.DemoUserPojo" useGeneratedKeys="true" keyProperty="id">
+      <![CDATA[
+        insert  into users(
+          name,
+          address
+        )values (
+          #{name},
+          #{address}
+        )
+      ]]>
+    </insert>
+
+    <delete id="del" parameterType="java.util.HashMap">
+       <![CDATA[
+        delete from users
+       ]]>
+    <include refid="common"/>
+    </delete>
+</mapper>

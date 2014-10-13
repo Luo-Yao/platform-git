@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!-- ﻿需要把controller去掉，否则影响事务管理-->
+    <context:component-scan base-package="com.tinet.ccic.v3.app.**.service"/>
+    <context:component-scan base-package="com.framework.redis.dao"/>
+    <context:component-scan base-package="com.tinet.ccic.v3.app.**.dao.redis"/>
+
+    <context:property-placeholder location="classpath:postgres.properties,classpath:redis.properties" ignore-unresolvable="true"/>
+
+    <import resource="applicationContext-db.xml"/>
+    <import resource="applicationContext-redis.xml"/>
+    <import resource="applicationContext-initBaseinfo.xml"/>
+
+</beans>

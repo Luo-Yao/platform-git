@@ -1,0 +1,33 @@
+----------platform新框架关键技术点 说明文档----------------
+
+1.spring mvc
+
+2.spring bean注入
+
+3.spring 事物控制 @Transactional
+
+4.spring 拦截器
+
+5.过滤器
+
+6.mybatis的使用，CURD基本操作、多表查询、组合查询、条件查询，读写分离结构
+
+7.redis缓存框架
+
+8.Tomcat sesion共享
+
+9.jsp前端处理，JSTL标签、Velocity模版  (jQuery,AngularJS)
+
+10.URLRewrite安全性过滤，前端静态化
+
+11.REST风格的相关配置，web.xml-default
+
+12.Spring全局Exception、404、500页面配置
+
+13.Spring 转发与重定向
+
+    return "forward:/order/add";
+    return "redirect:/index.jsp";
+    为了防止用户刷新浏览器(F5)导致表单重复提交，一般在保存或修改操作之后会redirect到一个结果页面（不是forward），
+    同时携带参数，如操作成功的提示信息。因为是Redirect，Request里的attribute不会传递过去。
+    Spring在3.1才提供了这个能力--RedirectAttributes。 反复按F5，操作成功的提示信息也不会再次出来（总共只出现一次），效果很理想。
