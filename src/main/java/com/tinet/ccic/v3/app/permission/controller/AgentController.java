@@ -11,6 +11,7 @@ import org.springframework.beans.factory.InitializingBean;
  * Email:johnny_lx@yahoo.com
  */
 public class AgentController implements InitializingBean {
+	
     @Override
     public void afterPropertiesSet() throws Exception {
 
